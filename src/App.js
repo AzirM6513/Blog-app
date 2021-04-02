@@ -40,6 +40,13 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    setUser(null);
+    blogService.setToken(null);
+
+    window.localStorage.removeItem('loggedBlogAppUser');
+  };
+
   const loginObj = {
     handleLogin,
     username,
@@ -53,7 +60,7 @@ const App = () => {
       {user === null ? (
         <LoginForm loginObj={loginObj} />
       ) : (
-        <Blogs blogs={blogs} user={user} />
+        <Blogs blogs={blogs} user={user} handleLogout={handleLogout} />
       )}
     </div>
   );
