@@ -16,6 +16,7 @@ const LoginForm = ({ loginObj }) => {
         <div>
           username
           <input
+            className='login'
             type='text'
             value={username}
             name='Username'
@@ -25,6 +26,7 @@ const LoginForm = ({ loginObj }) => {
         <div>
           password
           <input
+            className='login'
             type='password'
             value={password}
             name='Password'

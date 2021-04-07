@@ -1,8 +1,8 @@
-import React from 'react'
-const Blog = ({blog}) => (
-  <div>
+import React from 'react';
+const Blog = ({ blog }) => (
+  <li>
     {blog.title} {blog.author}
-  </div>  
-)
+  </li>
+);
 
-export default Blog
+export default Blog;

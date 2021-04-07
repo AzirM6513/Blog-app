@@ -1,0 +1,17 @@
+li {
+  list-style: none;
+}
+
+.login {
+  margin-left: 0.5em;
+}
+
+.username-p {
+  margin-bottom: 0.8rem;
+  display: inline-block;
+}
+
+.blog-form-label {
+  display: inline-block;
+  margin: 0.35rem;
+}
