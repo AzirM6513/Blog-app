@@ -1,6 +1,7 @@
 import React from 'react';
+import Error from './Error';
 
-const LoginForm = ({ loginObj }) => {
+const LoginForm = ({ loginObj, errorMessage }) => {
   // fixme: should destructure in function params
   const {
     handleLogin,
@@ -12,6 +13,7 @@ const LoginForm = ({ loginObj }) => {
   return (
     <div>
       <h2>login to application</h2>
+      <Error message={errorMessage} />
       <form onSubmit={handleLogin}>
         <div>
           username

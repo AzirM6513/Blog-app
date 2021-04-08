@@ -15,3 +15,20 @@ li {
   display: inline-block;
   margin: 0.35rem;
 }
+
+.message {
+  padding: 1.5rem;
+  border-width: 2px;
+  border-style: solid;
+  background-color: #bfbfbf;
+}
+
+.success-message {
+  color: green;
+  border-color: green;
+}
+
+.error-message {
+  color: red;
+  border-color: red;
+}

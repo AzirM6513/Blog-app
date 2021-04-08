@@ -11,7 +11,7 @@ const App = () => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [author, setAuthor] = useState('');
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +49,10 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      console.log('Wrong credentials');
+      setErrorMessage('Wrong Username or Password');
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
     }
   };
 
@@ -82,6 +85,13 @@ const App = () => {
 
     const returnedBlog = await blogService.create(blogObject);
     setBlogs(blogs.concat(returnedBlog));
+
+    setErrorMessage(
+      `a new blog '${returnedBlog.title}' by ${returnedBlog.author} added`
+    );
+    setTimeout(() => {
+      setErrorMessage(null);
+    }, 5000);
 
     setAuthor('');
     setTitle('');
@@ -123,10 +133,17 @@ const App = () => {
   return (
     <div>
       {user === null ? (
-        <LoginForm loginObj={loginObj} />
+        <div>
+          <LoginForm loginObj={loginObj} errorMessage={errorMessage} />
+        </div>
       ) : (
         <div>
-          <Blogs blogs={blogs} user={user} handleLogout={handleLogout} />
+          <Blogs
+            blogs={blogs}
+            user={user}
+            handleLogout={handleLogout}
+            errorMessage={errorMessage}
+          />
           {blogForm()}
         </div>
       )}
