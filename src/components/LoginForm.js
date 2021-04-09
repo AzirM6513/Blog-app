@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-import Togglable from './Togglable';
 import Error from './Error';
 
 const LoginForm = ({ login, errorMessage }) => {
@@ -17,7 +15,7 @@ const LoginForm = ({ login, errorMessage }) => {
   };
 
   return (
-    <Togglable buttonLabel='login'>
+    <div>
       <h2>login to application</h2>
       <Error message={errorMessage} />
       <form onSubmit={handleLogin}>
@@ -43,7 +41,7 @@ const LoginForm = ({ login, errorMessage }) => {
         </div>
         <button type='submit'>login</button>
       </form>
-    </Togglable>
+    </div>
   );
 };
 
