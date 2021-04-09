@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-const Blog = ({ blog }) => {
+import userService from '../services/users';
+
+const Blog = async ({ blog }) => {
   const [showDetails, setShowDetails] = useState(true);
+  const { username } = await userService.findUserById(blog.user);
 
   if (showDetails) {
     return (
@@ -13,7 +16,7 @@ const Blog = ({ blog }) => {
           likes {blog.likes}
           <button>like</button>
         </li>
-        <li>{blog.user}</li>
+        <li>{username}</li>
       </ul>
     );
   }
