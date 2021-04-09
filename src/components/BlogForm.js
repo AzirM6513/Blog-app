@@ -22,7 +22,7 @@ const BlogForm = ({ createBlog }) => {
   };
 
   return (
-    <Togglable buttonLabel='new blog'>
+    <Togglable buttonLabel='create new blog'>
       <h2>create new</h2>
       <form onSubmit={addBlog}>
         <div>
