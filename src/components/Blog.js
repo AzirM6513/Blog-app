@@ -19,12 +19,14 @@ const Blog = ({ blog }) => {
       <ul className='margin-bottom slim-black-border ul-padding'>
         <li>
           {blog.title} {blog.author}
-          <button onClick={toggleDetails}>hide</button>
+          <button className='margin-left' onClick={toggleDetails}>
+            hide
+          </button>
         </li>
         <li>{blog.url}</li>
         <li>
           likes {blog.likes}
-          <button>like</button>
+          <button className='margin-left'>like</button>
         </li>
         <li>{username || blog.author}</li>
       </ul>
@@ -34,7 +36,9 @@ const Blog = ({ blog }) => {
   return (
     <li>
       {blog.title} {blog.author}
-      <button onClick={toggleDetails}>show</button>
+      <button className='margin-left' onClick={toggleDetails}>
+        show
+      </button>
     </li>
   );
 };
