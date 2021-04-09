@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Togglable from './Togglable';
 
 const BlogForm = ({ createBlog }) => {
   const [title, setTitle] = useState('');
@@ -21,7 +22,7 @@ const BlogForm = ({ createBlog }) => {
   };
 
   return (
-    <div>
+    <Togglable buttonLabel='new blog'>
       <h2>create new</h2>
       <form onSubmit={addBlog}>
         <div>
@@ -53,7 +54,7 @@ const BlogForm = ({ createBlog }) => {
 
         <button type='submit'>create</button>
       </form>
-    </div>
+    </Togglable>
   );
 };
 
