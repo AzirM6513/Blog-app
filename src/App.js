@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import LoginForm from './components/LoginForm';
 import Blogs from './components/Blogs';
-import BlogForm from './components/BlogForm';
 
 import blogService from './services/blogs';
 import loginService from './services/login';
@@ -83,8 +82,8 @@ const App = () => {
             user={user}
             handleLogout={handleLogout}
             errorMessage={errorMessage}
+            addBlog={addBlog}
           />
-          <BlogForm createBlog={addBlog} />
         </div>
       )}
     </div>
