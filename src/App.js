@@ -69,6 +69,11 @@ const App = () => {
     }, 5000);
   };
 
+  const updateBlog = async (blog) => {
+    const returnedBlog = await blogService.update(blog);
+    setBlogs(blogs.filter((post) => post.id !== blog.id).concat(returnedBlog));
+  };
+
   return (
     <div>
       {user === null ? (
@@ -83,6 +88,7 @@ const App = () => {
             handleLogout={handleLogout}
             errorMessage={errorMessage}
             addBlog={addBlog}
+            updateBlog={updateBlog}
           />
         </div>
       )}
