@@ -11,8 +11,6 @@ const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -29,9 +27,7 @@ const App = () => {
     }
   }, []);
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-
+  const handleLogin = async (username, password) => {
     try {
       const user = await loginService.login({
         username,
@@ -43,9 +39,6 @@ const App = () => {
       blogService.setToken(user.token);
 
       setUser(user);
-
-      setUsername('');
-      setPassword('');
     } catch (exception) {
       setErrorMessage('Wrong Username or Password');
       setTimeout(() => {
@@ -77,19 +70,11 @@ const App = () => {
     }, 5000);
   };
 
-  const loginObj = {
-    handleLogin,
-    username,
-    password,
-    setUsername,
-    setPassword,
-  };
-
   return (
     <div>
       {user === null ? (
         <div>
-          <LoginForm loginObj={loginObj} errorMessage={errorMessage} />
+          <LoginForm login={handleLogin} errorMessage={errorMessage} />
         </div>
       ) : (
         <div>

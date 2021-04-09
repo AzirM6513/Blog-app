@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Error from './Error';
 
-const LoginForm = ({ loginObj, errorMessage }) => {
-  // fixme: should destructure in function params
-  const {
-    handleLogin,
-    username,
-    password,
-    setUsername,
-    setPassword,
-  } = loginObj;
+const LoginForm = ({ login, errorMessage }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    login(username, password);
+
+    setUsername('');
+    setPassword('');
+  };
+
   return (
     <div>
       <h2>login to application</h2>
