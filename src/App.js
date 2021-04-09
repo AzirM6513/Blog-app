@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import LoginForm from './components/LoginForm';
 import Blogs from './components/Blogs';
+import BlogForm from './components/BlogForm';
 
 import blogService from './services/blogs';
 import loginService from './services/login';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [title, setTitle] = useState('');
-  const [url, setUrl] = useState('');
-  const [author, setAuthor] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
 
   const [username, setUsername] = useState('');
@@ -63,27 +61,12 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogAppUser');
   };
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
+  const addBlog = async (blog) => {
+    if (blog.author === '') {
+      blog.author = user.name;
+    }
 
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value);
-  };
-
-  const handleUrlChange = (event) => {
-    setUrl(event.target.value);
-  };
-
-  const addBlog = async (event) => {
-    event.preventDefault();
-    const blogObject = {
-      title: title,
-      author: author || user.name,
-      url: url,
-    };
-
-    const returnedBlog = await blogService.create(blogObject);
+    const returnedBlog = await blogService.create(blog);
     setBlogs(blogs.concat(returnedBlog));
 
     setErrorMessage(
@@ -92,10 +75,6 @@ const App = () => {
     setTimeout(() => {
       setErrorMessage(null);
     }, 5000);
-
-    setAuthor('');
-    setTitle('');
-    setUrl('');
   };
 
   const loginObj = {
@@ -105,30 +84,6 @@ const App = () => {
     setUsername,
     setPassword,
   };
-
-  const blogForm = () => (
-    <div>
-      <h2>create new</h2>
-      <form onSubmit={addBlog}>
-        <div>
-          <p className='blog-form-label'>title:</p>
-          <input type='text' value={title} onChange={handleTitleChange} />
-        </div>
-
-        <div>
-          <p className='blog-form-label'>author:</p>
-          <input type='text' value={author} onChange={handleAuthorChange} />
-        </div>
-
-        <div>
-          <p className='blog-form-label'>url:</p>
-          <input type='text' value={url} onChange={handleUrlChange} />
-        </div>
-
-        <button type='submit'>create</button>
-      </form>
-    </div>
-  );
 
   return (
     <div>
@@ -144,7 +99,7 @@ const App = () => {
             handleLogout={handleLogout}
             errorMessage={errorMessage}
           />
-          {blogForm()}
+          <BlogForm createBlog={addBlog} />
         </div>
       )}
     </div>
