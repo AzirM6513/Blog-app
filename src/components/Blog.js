@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import userService from '../services/users';
 
-const Blog = async ({ blog }) => {
+const Blog = ({ blog }) => {
   const [showDetails, setShowDetails] = useState(true);
-  const { username } = await userService.findUserById(blog.user);
+  let username = null;
+
+  if (blog.hasOwnProperty('user')) {
+    username = userService.getUserById(blog.user).username;
+  }
 
   if (showDetails) {
     return (
@@ -16,7 +20,7 @@ const Blog = async ({ blog }) => {
           likes {blog.likes}
           <button>like</button>
         </li>
-        <li>{username}</li>
+        <li>{username || blog.author}</li>
       </ul>
     );
   }
