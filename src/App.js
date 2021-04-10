@@ -74,6 +74,26 @@ const App = () => {
     setBlogs(blogs.filter((post) => post.id !== blog.id).concat(returnedBlog));
   };
 
+  const removeBlog = async (blog) => {
+    try {
+      console.log(blog.id);
+      await blogService.deleteById(blog.id);
+      setBlogs(blogs.filter((post) => post.id !== blog.id));
+
+      setErrorMessage(`blog '${blog.title}' was removed`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    } catch (exception) {
+      // fix me: correctly display red or green if failed or success
+
+      setErrorMessage(`failed to delete blog '${blog.title}'`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
+  };
+
   return (
     <div>
       {user === null ? (
@@ -89,6 +109,7 @@ const App = () => {
             errorMessage={errorMessage}
             addBlog={addBlog}
             updateBlog={updateBlog}
+            removeBlog={removeBlog}
           />
         </div>
       )}
