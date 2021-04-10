@@ -83,7 +83,7 @@ const App = () => {
       ) : (
         <div>
           <Blogs
-            blogs={blogs}
+            blogs={blogs.sort((a, b) => b.likes - a.likes)}
             user={user}
             handleLogout={handleLogout}
             errorMessage={errorMessage}
