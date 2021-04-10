@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userService from '../services/users';
 
-const Blog = ({ blog, updateBlog }) => {
+const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [buttonLabel, setButtonLabel] = useState('view');
 
@@ -27,12 +27,18 @@ const Blog = ({ blog, updateBlog }) => {
     updateBlog(newBlog);
   };
 
+  const deleteBlog = () => {
+    if (window.confirm(`remove blog '${blog.title}' by ${blog.author}?`)) {
+      removeBlog(blog);
+    }
+  };
+
   if (blog.hasOwnProperty('user')) {
     username = userService.getUserById(blog.user).username;
   }
 
   return (
-    <ul className='margin-bottom slim-black-border ul-padding'>
+    <ul className='margin-bottom slim-black-border padding'>
       <li>
         {blog.title} {blog.author}
         <button className='margin-left' onClick={toggleDetails}>
@@ -51,6 +57,13 @@ const Blog = ({ blog, updateBlog }) => {
         </button>
       </li>
       <li style={showWhenVisible}>{username || blog.author}</li>
+      <button
+        style={showWhenVisible}
+        className='del-btn margin-top slim-black-border'
+        onClick={deleteBlog}
+      >
+        <strong>delete</strong>
+      </button>
     </ul>
   );
 };
