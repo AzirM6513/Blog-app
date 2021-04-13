@@ -39,7 +39,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
 
   return (
     <ul className='margin-bottom slim-black-border padding'>
-      <li>
+      <li className='blog-header'>
         {blog.title} {blog.author}
         <button className='margin-left' onClick={toggleDetails}>
           {buttonLabel}
