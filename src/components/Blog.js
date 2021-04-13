@@ -33,7 +33,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     }
   };
 
-  if (blog.hasOwnProperty('user')) {
+  if (Object.keys(blog).includes('user')) {
     username = userService.getUserById(blog.user).username;
   }
 
