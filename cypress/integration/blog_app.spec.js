@@ -59,5 +59,40 @@ describe('blog app', function () {
 
       cy.contains('cypress test cypress');
     });
+
+    // FixMe: refactor to create dry code
+    // describe('buttons', function () {
+    //   it('like button increases likes by one', function () {
+    //     cy.get('.toggle-details').click();
+
+    //     cy.get('togglableContent').contains('likes 0');
+
+    //     cy.get('.togglableContent')
+    //       .parent()
+    //       .find('button')
+    //       .contains('like')
+    //       .click();
+
+    //     cy.get('.togglableContent').contains('likes 1');
+    //   });
+    // });
+
+    it('when blog likes button clicked likes increases by one', function () {
+      cy.get('.toggle-btn').contains('create new blog').click();
+
+      cy.get('#title-input').type('cypress test');
+      cy.get('#author-input').type('cypress');
+      cy.get('#url-input').type('cypress.testing.dev');
+      cy.get('#submit-blog-btn').click();
+
+      cy.get('.toggle-details').click();
+      cy.get('.togglableContent')
+        .parent()
+        .find('button')
+        .contains('like')
+        .click();
+
+      cy.get('.togglableContent').contains('likes 1');
+    });
   });
 });
