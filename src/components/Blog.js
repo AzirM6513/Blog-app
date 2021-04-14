@@ -41,29 +41,26 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     <ul className='margin-bottom slim-black-border padding'>
       <li className='blog-header'>
         {blog.title} {blog.author}
-        <button className='margin-left' onClick={toggleDetails}>
+        <button className='margin-left toggle-details' onClick={toggleDetails}>
           {buttonLabel}
         </button>
       </li>
-      <li style={showWhenVisible}>{blog.url}</li>
-      <li style={showWhenVisible}>
-        likes {blog.likes}
+      <div style={showWhenVisible} className='togglableContent'>
+        <li>{blog.url}</li>
+        <li>
+          likes {blog.likes}
+          <button className='margin-left' onClick={addLike}>
+            like
+          </button>
+        </li>
+        <li>{username || blog.author}</li>
         <button
-          className='margin-left'
-          style={showWhenVisible}
-          onClick={addLike}
+          className='del-btn margin-top slim-black-border'
+          onClick={deleteBlog}
         >
-          like
+          <strong>delete</strong>
         </button>
-      </li>
-      <li style={showWhenVisible}>{username || blog.author}</li>
-      <button
-        style={showWhenVisible}
-        className='del-btn margin-top slim-black-border'
-        onClick={deleteBlog}
-      >
-        <strong>delete</strong>
-      </button>
+      </div>
     </ul>
   );
 };
