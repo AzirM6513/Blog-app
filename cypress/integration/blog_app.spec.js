@@ -1,4 +1,4 @@
-describe('Blog app', function () {
+describe('blog app', function () {
   beforeEach(function () {
     const user = {
       username: 'christian',
@@ -39,6 +39,25 @@ describe('Blog app', function () {
         .and('have.css', 'border-style', 'solid');
 
       cy.get('html').should('not.contain', 'Christian Ortiz logged-in');
+    });
+  });
+
+  describe('when logged in', function () {
+    beforeEach(function () {
+      cy.get('input:first').type('christian');
+      cy.get('input:last').type('cypress testing');
+      cy.get('button').contains('login').click();
+    });
+
+    it('blog can be created', function () {
+      cy.get('.toggle-btn').contains('create new blog').click();
+
+      cy.get('#title-input').type('cypress test');
+      cy.get('#author-input').type('cypress');
+      cy.get('#url-input').type('cypress.testing.dev');
+      cy.get('#submit-blog-btn').click();
+
+      cy.contains('cypress test cypress');
     });
   });
 });
