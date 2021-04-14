@@ -23,24 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-Cypress.Commands.add('createUser', ({ username, password }) => {
-  const formattedName = (username) => {
-    let name = username
-      .split(' ')
-      .map((part) => part.toLowerCase())
-      .map((part) => part.split(''));
-
-    for (let i = 0; i < name.length; i++) {
-      name[i][0] = name[i][0].toUpperCase();
-    }
-
-    return name.map((part) => part.join('')).join(' ');
-  };
-
-  cy.request('POST', 'http://localhost:3003/api/users', {
-    name: formattedName(username),
-    username: username,
-    password: password,
-  });
-});
