@@ -3,11 +3,19 @@ describe('Blog app', function () {
     const user = {
       username: 'christian',
       password: 'cypress testing',
+      name: 'Christian Ortiz',
     };
 
-    cy.createUser(user.username, user.password);
-    cy.request('POST', 'http://localhost:3003/api/login', user);
+    cy.request('POST', 'http://localhost:3003/api/testing/reset');
+    cy.request('POST', 'http://localhost:3003/api/users', user);
 
-    cy.visit('http://localhost:3003');
+    cy.visit('http://localhost:3000');
+  });
+
+  it('front page can be opened', function () {
+    cy.contains('login to application');
+    cy.contains('username');
+    cy.contains('password');
+    cy.get('button').contains('login');
   });
 });
