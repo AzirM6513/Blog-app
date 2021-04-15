@@ -44,9 +44,12 @@ describe('blog app', function () {
 
   describe('when logged in', function () {
     beforeEach(function () {
-      cy.get('input:first').type('christian');
-      cy.get('input:last').type('cypress testing');
-      cy.get('button').contains('login').click();
+      const user = {
+        username: 'christian',
+        password: 'cypress testing',
+      };
+
+      cy.login(user);
     });
 
     it('blog can be created', function () {
@@ -60,63 +63,43 @@ describe('blog app', function () {
       cy.contains('cypress test cypress');
     });
 
-    // FixMe: refactor to create dry code
-    // describe('buttons', function () {
-    //   it('like button increases likes by one', function () {
-    //     cy.get('.toggle-details').click();
+    describe('after blog is creted', function () {
+      beforeEach(function () {
+        const blog = {
+          title: 'cypress testing',
+          author: 'cypress',
+          url: 'cypress.io',
+          likes: 0,
+        };
 
-    //     cy.get('togglableContent').contains('likes 0');
+        cy.createBlog(blog);
+      });
 
-    //     cy.get('.togglableContent')
-    //       .parent()
-    //       .find('button')
-    //       .contains('like')
-    //       .click();
+      it('like button works', function () {
+        cy.get('.toggle-details').click();
+        cy.get('.togglableContent')
+          .parent()
+          .find('button')
+          .contains('like')
+          .click();
 
-    //     cy.get('.togglableContent').contains('likes 1');
-    //   });
-    // });
+        cy.get('.togglableContent').contains('likes 1');
+      });
 
-    it('when blog likes button clicked likes increases by one', function () {
-      cy.get('.toggle-btn').contains('create new blog').click();
+      it('delete button works', function () {
+        cy.get('.toggle-details').click();
+        cy.get('.togglableContent').parent().find('.del-btn').click();
 
-      cy.get('#title-input').type('cypress test');
-      cy.get('#author-input').type('cypress');
-      cy.get('#url-input').type('cypress.testing.dev');
-      cy.get('#submit-blog-btn').click();
-
-      cy.get('.toggle-details').click();
-      cy.get('.togglableContent')
-        .parent()
-        .find('button')
-        .contains('like')
-        .click();
-
-      cy.get('.togglableContent').contains('likes 1');
-    });
-
-    it('when delete button clicked blog is deleted from page and server', function () {
-      cy.get('.toggle-btn').contains('create new blog').click();
-
-      cy.get('#title-input').type('cypress test delete');
-      cy.get('#author-input').type('cypress');
-      cy.get('#url-input').type('cypress.io');
-      cy.get('#submit-blog-btn').click();
-
-      cy.contains('cypress test delete cypress');
-
-      cy.get('.toggle-details').click();
-      cy.get('.togglableContent').parent().find('.del-btn').click();
-
-      cy.get('html').should('not.contain', 'cypress test delete cypress');
-      cy.get('.message')
-        .should(
-          'contain',
-          // eslint-disable-next-line quotes
-          "blog 'cypress test delete' was removed"
-        )
-        .and('have.css', 'color', 'rgb(0, 128, 0)')
-        .and('have.css', 'border-style', 'solid');
+        cy.get('html').should('not.contain', 'cypress test cypress');
+        cy.get('.message')
+          .should(
+            'contain',
+            // eslint-disable-next-line quotes
+            "blog 'cypress testing' was removed"
+          )
+          .and('have.css', 'color', 'rgb(0, 128, 0)')
+          .and('have.css', 'border-style', 'solid');
+      });
     });
   });
 });
