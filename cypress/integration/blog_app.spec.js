@@ -101,5 +101,44 @@ describe('blog app', function () {
           .and('have.css', 'border-style', 'solid');
       });
     });
+
+    describe('many blogs are created', function () {
+      beforeEach(function () {
+        for (let i = 1; i <= 3; i++) {
+          cy.createBlog({
+            title: 'cypress test ' + i,
+            author: 'cypress',
+            url: 'cypress.io',
+            likes: i,
+          });
+        }
+      });
+
+      it.only('blogs sorted in descending order by likes', function () {
+        cy.get('.blog').should('have.length', 3);
+        cy.get('.toggle-details').click({ multiple: true });
+
+        cy.get('.togglableContent')
+          .get('.like-details')
+          .should('have.length', 3);
+        cy.get('.togglableContent')
+          .get('.like-details')
+          .then((item) => {
+            const arr = [];
+
+            for (let i = 0; i < 3; i++) {
+              arr.push(parseInt(item[i].childNodes[1].data));
+            }
+
+            for (let i = 0; i < 2; i++) {
+              if (arr[i] > arr[i + 1]) {
+                return false;
+              }
+            }
+
+            return true;
+          });
+      });
+    });
   });
 });
