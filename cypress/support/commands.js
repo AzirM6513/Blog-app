@@ -34,7 +34,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
   });
 });
 
-Cypress.Commands.add('createBlog', ({ title, author, url, likes = 0 }) => {
+Cypress.Commands.add('createBlog', ({ title, author, url, likes }) => {
   cy.request({
     url: 'http://localhost:3003/api/blogs',
     method: 'POST',
@@ -47,4 +47,25 @@ Cypress.Commands.add('createBlog', ({ title, author, url, likes = 0 }) => {
   });
 
   cy.visit('http://localhost:3000');
+});
+
+Cypress.Commands.add('randomString', (size = 27) => {
+  const alphaNumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456567890';
+  const randomString = [];
+
+  const randomCapital = (character) => {
+    const random = Math.floor(Math.random() * 2);
+    return random === 1 ? character.toLowerCase() : character;
+  };
+
+  for (let i = 0; i < size; i++) {
+    const n = Math.floor(Math.random() * alphaNumeric.length);
+    randomString.push(randomCapital(alphaNumeric[n]));
+  }
+
+  return randomString.join('');
+});
+
+Cypress.Commands.add('randomNumber', (max = 100) => {
+  return Math.floor(Math.random() * max + 1);
 });
