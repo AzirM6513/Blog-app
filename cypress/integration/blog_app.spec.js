@@ -94,5 +94,29 @@ describe('blog app', function () {
 
       cy.get('.togglableContent').contains('likes 1');
     });
+
+    it('when delete button clicked blog is deleted from page and server', function () {
+      cy.get('.toggle-btn').contains('create new blog').click();
+
+      cy.get('#title-input').type('cypress test delete');
+      cy.get('#author-input').type('cypress');
+      cy.get('#url-input').type('cypress.io');
+      cy.get('#submit-blog-btn').click();
+
+      cy.contains('cypress test delete cypress');
+
+      cy.get('.toggle-details').click();
+      cy.get('.togglableContent').parent().find('.del-btn').click();
+
+      cy.get('html').should('not.contain', 'cypress test delete cypress');
+      cy.get('.message')
+        .should(
+          'contain',
+          // eslint-disable-next-line quotes
+          "blog 'cypress test delete' was removed"
+        )
+        .and('have.css', 'color', 'rgb(0, 128, 0)')
+        .and('have.css', 'border-style', 'solid');
+    });
   });
 });
