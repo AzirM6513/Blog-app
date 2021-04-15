@@ -38,7 +38,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   }
 
   return (
-    <ul className='margin-bottom slim-black-border padding'>
+    <ul className='margin-bottom slim-black-border padding blog'>
       <li className='blog-header'>
         {blog.title} {blog.author}
         <button className='margin-left toggle-details' onClick={toggleDetails}>
@@ -47,7 +47,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       </li>
       <div style={showWhenVisible} className='togglableContent'>
         <li>{blog.url}</li>
-        <li>
+        <li className='like-details'>
           likes {blog.likes}
           <button className='margin-left' onClick={addLike}>
             like
