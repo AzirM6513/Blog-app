@@ -39,16 +39,18 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     username = userService.getUserById(blog.user).username;
   }
 
-  const Header = () => <Typography variant='h2'>Blgos</Typography>;
+  const Header = () => (
+    <Typography>
+      {blog.title} {blog.author}
+    </Typography>
+  );
 
   return (
-    <ul className='margin-bottom slim-black-border padding blog'>
-      <li className='blog-header'>
-        {blog.title} {blog.author}
-        <button className='margin-left toggle-details' onClick={toggleDetails}>
-          {buttonLabel}
-        </button>
-      </li>
+    <Card className='margin-bottom slim-black-border padding blog'>
+      <Header className='blog-header' />
+      <button className='margin-left toggle-details' onClick={toggleDetails}>
+        {buttonLabel}
+      </button>
       <div style={showWhenVisible} className='togglableContent'>
         <li>{blog.url}</li>
         <li className='like-details'>
@@ -65,7 +67,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
           <strong>delete</strong>
         </button>
       </div>
-    </ul>
+    </Card>
   );
 };
 
