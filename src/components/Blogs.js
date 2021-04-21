@@ -4,8 +4,6 @@ import Blog from './Blog';
 import BlogForm from './BlogForm';
 import Notification from './Notification';
 
-import { Card, Typography } from '@material-ui/core';
-
 const Blogs = ({
   blogs,
   user,
@@ -15,11 +13,9 @@ const Blogs = ({
   updateBlog,
   removeBlog,
 }) => {
-  const Header = () => <Typography variant='h2'>Blgos</Typography>;
-
   return (
-    <Card>
-      <Header />
+    <div>
+      <h2>Blogs</h2>
       <Notification message={errorMessage} />
       <p className='username-p'>{user.name} logged-in</p>
       <button onClick={handleLogout}>logout</button>
@@ -34,7 +30,7 @@ const Blogs = ({
           />
         ))}
       </ul>
-    </Card>
+    </div>
   );
 };
 

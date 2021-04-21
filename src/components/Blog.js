@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import userService from '../services/users';
 
+import { Card, Typography } from '@material-ui/core';
+
 const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [buttonLabel, setButtonLabel] = useState('view');
@@ -36,6 +38,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   if (Object.keys(blog).includes('user')) {
     username = userService.getUserById(blog.user).username;
   }
+
+  const Header = () => <Typography variant='h2'>Blgos</Typography>;
 
   return (
     <ul className='margin-bottom slim-black-border padding blog'>
