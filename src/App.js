@@ -6,6 +6,8 @@ import Blogs from './components/Blogs';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
+import Container from '@material-ui/core/Container';
+
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -95,7 +97,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <Container maxWidth='md'>
       {user === null ? (
         <div>
           <LoginForm login={handleLogin} errorMessage={errorMessage} />
@@ -113,7 +115,7 @@ const App = () => {
           />
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 
