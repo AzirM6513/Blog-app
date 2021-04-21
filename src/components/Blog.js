@@ -45,25 +45,22 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     </Typography>
   );
 
+  const Votes = () => (
+    <Typography>
+      likes {blog.likes}
+      <button onClick={addLike}>like</button>
+    </Typography>
+  );
+
   return (
-    <Card className='margin-bottom slim-black-border padding blog'>
-      <Header className='blog-header' />
-      <button className='margin-left toggle-details' onClick={toggleDetails}>
-        {buttonLabel}
-      </button>
-      <div style={showWhenVisible} className='togglableContent'>
+    <Card>
+      <Header />
+      <button onClick={toggleDetails}>{buttonLabel}</button>
+      <div style={showWhenVisible}>
         <li>{blog.url}</li>
-        <li className='like-details'>
-          likes {blog.likes}
-          <button className='margin-left' onClick={addLike}>
-            like
-          </button>
-        </li>
+        <Votes />
         <li>{username || blog.author}</li>
-        <button
-          className='del-btn margin-top slim-black-border'
-          onClick={deleteBlog}
-        >
+        <button onClick={deleteBlog}>
           <strong>delete</strong>
         </button>
       </div>
