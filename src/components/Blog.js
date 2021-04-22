@@ -4,6 +4,7 @@ import userService from '../services/users';
 import {
   Card,
   CardContent,
+  CardActions,
   Typography,
   Button,
   makeStyles,
@@ -13,6 +14,20 @@ import { ThumbUpAltOutlined, ThumbDownAltOutlined } from '@material-ui/icons';
 const useStyles = makeStyles({
   gutterBottom: {
     marginBottom: 0.8 + 'rem',
+  },
+  content: {
+    marginTop: 1.2 + 'rem',
+    MarginBottom: 1.2 + 'rem',
+  },
+  links: {
+    textDecoration: 'none',
+    color: '#636363',
+    '&:hover': {
+      color: 'black',
+    },
+  },
+  smallMarginBottom: {
+    marginBottom: 0.2 + 'rem',
   },
 });
 
@@ -53,10 +68,23 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     username = userService.getUserById(blog.user).username;
   }
 
-  const Header = () => (
-    <Typography variant='body1' onClick={toggleDetails}>
-      {blog.title} {blog.author}
-    </Typography>
+  const Head = () => (
+    <>
+      <Typography variant='h5' onClick={toggleDetails}>
+        {blog.title} {blog.author}
+      </Typography>
+
+      <CardActions>
+        <Button size='small' onClick={addLike} color='primary'>
+          <ThumbUpAltOutlined fontSize='small' />
+          {blog.likes}
+        </Button>
+
+        <Button size='small' onClick={addDislike} color='secondary'>
+          <ThumbDownAltOutlined fontSize='small' />0
+        </Button>
+      </CardActions>
+    </>
   );
 
   const Votes = () => (
@@ -64,13 +92,21 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       <Typography variant='body2' component='h3'>
         likes {blog.likes}
       </Typography>
-      <Button onClick={addLike}>
-        <ThumbUpAltOutlined fontSize='small' />
-      </Button>
+    </div>
+  );
 
-      <Button onClick={addDislike}>
-        <ThumbDownAltOutlined fontSize='small' />
-      </Button>
+  const Info = () => (
+    <div style={showWhenVisible} className={classes.content}>
+      <Typography variant='body1'>
+        <a href={blog.url} className={(classes.marginBottom, classes.links)}>
+          read more
+        </a>
+      </Typography>
+      <Votes />
+      <li>{username || blog.author}</li>
+      <button onClick={deleteBlog}>
+        <strong>delete</strong>
+      </button>
     </div>
   );
 
@@ -79,15 +115,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   return (
     <Card className={classes.gutterBottom} raised>
       <CardContent>
-        <Header />
-        <div style={showWhenVisible}>
-          <li>{blog.url}</li>
-          <Votes />
-          <li>{username || blog.author}</li>
-          <button onClick={deleteBlog}>
-            <strong>delete</strong>
-          </button>
-        </div>
+        <Head />
+        <Info />
       </CardContent>
     </Card>
   );
