@@ -6,14 +6,12 @@ import { ThumbUpAltOutlined, ThumbDownAltOutlined } from '@material-ui/icons';
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [showDetails, setShowDetails] = useState(false);
-  const [buttonLabel, setButtonLabel] = useState('view');
   const showWhenVisible = { display: showDetails ? '' : 'none' };
 
   let username = null;
 
   const toggleDetails = () => {
     setShowDetails(!showDetails);
-    setButtonLabel(showDetails ? 'view' : 'hide');
   };
 
   const addLike = () => {
@@ -44,7 +42,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   }
 
   const Header = () => (
-    <Typography variant='body1'>
+    <Typography variant='body1' onClick={toggleDetails}>
       {blog.title} {blog.author}
     </Typography>
   );
@@ -68,7 +66,6 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     <Card>
       <CardContent>
         <Header />
-        <button onClick={toggleDetails}>{buttonLabel}</button>
         <div style={showWhenVisible}>
           <li>{blog.url}</li>
           <Votes />
