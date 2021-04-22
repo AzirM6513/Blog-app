@@ -50,7 +50,14 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       <Typography variant='body2' component='p'>
         likes {blog.likes}
       </Typography>
-      <button onClick={addLike}>like</button>
+      <button onClick={addLike}>
+        <span className='material-icons-outlined'>thumb_up</span>
+      </button>
+      <button
+        onClick={() => console.log('i feel like this button isnt working')}
+      >
+        <span className='material-icons-outlined'>thumb_down</span>
+      </button>
     </Typography>
   );
 
