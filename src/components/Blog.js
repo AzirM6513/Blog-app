@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import userService from '../services/users';
 
 import { Card, Typography } from '@material-ui/core';
+import { ThumbUpAltOutlined, ThumbDownAltOutlined } from '@material-ui/icons';
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [buttonLabel, setButtonLabel] = useState('view');
-
   const showWhenVisible = { display: showDetails ? '' : 'none' };
 
   let username = null;
@@ -51,12 +51,12 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         likes {blog.likes}
       </Typography>
       <button onClick={addLike}>
-        <span className='material-icons-outlined'>thumb_up</span>
+        <ThumbUpAltOutlined fontSize='small' />
       </button>
       <button
         onClick={() => console.log('i feel like this button isnt working')}
       >
-        <span className='material-icons-outlined'>thumb_down</span>
+        <ThumbDownAltOutlined fontSize='small' />
       </button>
     </Typography>
   );
