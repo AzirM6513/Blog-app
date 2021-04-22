@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userService from '../services/users';
 
-import { Card, Typography } from '@material-ui/core';
+import { Card, Typography, Button } from '@material-ui/core';
 import { ThumbUpAltOutlined, ThumbDownAltOutlined } from '@material-ui/icons';
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
@@ -29,6 +29,10 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     updateBlog(newBlog);
   };
 
+  const addDislike = () => {
+    console.log('i feel like this button hasnt been implemented yet');
+  };
+
   const deleteBlog = () => {
     if (window.confirm(`remove blog '${blog.title}' by ${blog.author}?`)) {
       removeBlog(blog);
@@ -40,30 +44,29 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   }
 
   const Header = () => (
-    <Typography variant='body1' component='p'>
+    <Typography variant='body1'>
       {blog.title} {blog.author}
     </Typography>
   );
 
   const Votes = () => (
-    <Typography>
-      <Typography variant='body2' component='p'>
+    <div>
+      <Typography variant='body2' component='h3'>
         likes {blog.likes}
       </Typography>
-      <button onClick={addLike}>
+      <Button onClick={addLike}>
         <ThumbUpAltOutlined fontSize='small' />
-      </button>
-      <button
-        onClick={() => console.log('i feel like this button isnt working')}
-      >
+      </Button>
+
+      <Button onClick={addDislike}>
         <ThumbDownAltOutlined fontSize='small' />
-      </button>
-    </Typography>
+      </Button>
+    </div>
   );
 
   return (
     <Card>
-      <Header component='h2' />
+      <Header />
       <button onClick={toggleDetails}>{buttonLabel}</button>
       <div style={showWhenVisible}>
         <li>{blog.url}</li>
