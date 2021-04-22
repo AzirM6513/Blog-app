@@ -40,21 +40,23 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   }
 
   const Header = () => (
-    <Typography>
+    <Typography variant='body1' component='p'>
       {blog.title} {blog.author}
     </Typography>
   );
 
   const Votes = () => (
     <Typography>
-      likes {blog.likes}
+      <Typography variant='body2' component='p'>
+        likes {blog.likes}
+      </Typography>
       <button onClick={addLike}>like</button>
     </Typography>
   );
 
   return (
     <Card>
-      <Header />
+      <Header component='h2' />
       <button onClick={toggleDetails}>{buttonLabel}</button>
       <div style={showWhenVisible}>
         <li>{blog.url}</li>
