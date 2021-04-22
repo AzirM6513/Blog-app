@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
 import userService from '../services/users';
 
-import { Card, CardContent, Typography, Button } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  makeStyles,
+} from '@material-ui/core';
 import { ThumbUpAltOutlined, ThumbDownAltOutlined } from '@material-ui/icons';
+
+const useStyles = makeStyles({
+  gutterBottom: {
+    marginBottom: 0.8 + 'rem',
+  },
+});
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -62,8 +74,10 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     </div>
   );
 
+  const classes = useStyles();
+
   return (
-    <Card>
+    <Card className={classes.gutterBottom} raised>
       <CardContent>
         <Header />
         <div style={showWhenVisible}>
