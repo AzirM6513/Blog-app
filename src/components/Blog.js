@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userService from '../services/users';
 
-import { Card, Typography, Button } from '@material-ui/core';
+import { Card, CardContent, Typography, Button } from '@material-ui/core';
 import { ThumbUpAltOutlined, ThumbDownAltOutlined } from '@material-ui/icons';
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
@@ -66,16 +66,18 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
 
   return (
     <Card>
-      <Header />
-      <button onClick={toggleDetails}>{buttonLabel}</button>
-      <div style={showWhenVisible}>
-        <li>{blog.url}</li>
-        <Votes />
-        <li>{username || blog.author}</li>
-        <button onClick={deleteBlog}>
-          <strong>delete</strong>
-        </button>
-      </div>
+      <CardContent>
+        <Header />
+        <button onClick={toggleDetails}>{buttonLabel}</button>
+        <div style={showWhenVisible}>
+          <li>{blog.url}</li>
+          <Votes />
+          <li>{username || blog.author}</li>
+          <button onClick={deleteBlog}>
+            <strong>delete</strong>
+          </button>
+        </div>
+      </CardContent>
     </Card>
   );
 };
