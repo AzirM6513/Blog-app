@@ -29,6 +29,9 @@ const useStyles = makeStyles({
   smallMarginBottom: {
     marginBottom: 0.2 + 'rem',
   },
+  deleteBtn: {
+    marginTop: 0.6 + 'rem',
+  },
 });
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
@@ -71,7 +74,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   const Head = () => (
     <>
       <Typography variant='h5' onClick={toggleDetails}>
-        {blog.title} {blog.author}
+        {blog.title}
       </Typography>
 
       <CardActions>
@@ -87,14 +90,6 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     </>
   );
 
-  const Votes = () => (
-    <div>
-      <Typography variant='body2' component='h3'>
-        likes {blog.likes}
-      </Typography>
-    </div>
-  );
-
   const Info = () => (
     <div style={showWhenVisible} className={classes.content}>
       <Typography variant='body1'>
@@ -102,11 +97,17 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
           read more
         </a>
       </Typography>
-      <Votes />
-      <li>{username || blog.author}</li>
-      <button onClick={deleteBlog}>
-        <strong>delete</strong>
-      </button>
+      <Typography variant='body1' color='textPrimary'>
+        Posted by {blog.author || username}
+      </Typography>
+      <Button
+        onClick={deleteBlog}
+        color='secondary'
+        variant='contained'
+        className={classes.deleteBtn}
+      >
+        delete
+      </Button>
     </div>
   );
 
