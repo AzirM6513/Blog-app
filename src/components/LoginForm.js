@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import Error from './Error';
+
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  loginBtn: {
+    marginTop: 0.8 + 'rem',
+  },
+});
 
 const LoginForm = ({ login, errorMessage }) => {
   const [username, setUsername] = useState('');
@@ -15,32 +26,33 @@ const LoginForm = ({ login, errorMessage }) => {
     setPassword('');
   };
 
+  const classes = useStyles();
+
   return (
     <div>
-      <h2>login to application</h2>
+      <Typography variant='h4' component='h2'>
+        login to application
+      </Typography>
       <Error message={errorMessage} />
       <form onSubmit={handleLogin}>
         <div>
-          username
-          <input
-            className='login'
-            type='text'
+          <TextField
+            label='username'
             value={username}
-            name='Username'
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
-          password
-          <input
-            className='login'
+          <TextField
+            label='password'
             type='password'
             value={password}
-            name='Password'
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type='submit'>login</button>
+        <Button type='submit' className={classes.loginBtn}>
+          login
+        </Button>
       </form>
     </div>
   );
