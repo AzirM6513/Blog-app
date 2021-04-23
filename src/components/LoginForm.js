@@ -30,7 +30,7 @@ const LoginForm = ({ login, errorMessage }) => {
   const classes = useStyles();
 
   return (
-    <Container>
+    <Container maxWidth='md'>
       <Typography variant='h4' component='h2' gutterBottom>
         login to application
       </Typography>
