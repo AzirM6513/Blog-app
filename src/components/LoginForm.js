@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -29,8 +30,8 @@ const LoginForm = ({ login, errorMessage }) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <Typography variant='h4' component='h2'>
+    <Container>
+      <Typography variant='h4' component='h2' gutterBottom>
         login to application
       </Typography>
       <Error message={errorMessage} />
@@ -50,11 +51,11 @@ const LoginForm = ({ login, errorMessage }) => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <Button type='submit' className={classes.loginBtn}>
+        <Button type='submit' className={classes.loginBtn} color='primary'>
           login
         </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
