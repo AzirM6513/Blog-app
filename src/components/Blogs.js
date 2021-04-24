@@ -4,6 +4,8 @@ import Blog from './Blog';
 import BlogForm from './BlogForm';
 import Notification from './Notification';
 
+import Container from '@material-ui/core/Container';
+
 const Blogs = ({
   blogs,
   user,
@@ -14,7 +16,7 @@ const Blogs = ({
   removeBlog,
 }) => {
   return (
-    <div>
+    <Container maxWidth='md'>
       <h2>Blogs</h2>
       <Notification message={errorMessage} />
       <p className='username-p'>{user.name} logged-in</p>
@@ -30,7 +32,7 @@ const Blogs = ({
           />
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };
 
