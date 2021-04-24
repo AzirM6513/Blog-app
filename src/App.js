@@ -6,7 +6,9 @@ import Blogs from './components/Blogs';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
-import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -97,13 +99,26 @@ const App = () => {
   };
 
   return (
-    <Container maxWidth='md'>
+    <div>
       {user === null ? (
         <div>
           <LoginForm login={handleLogin} errorMessage={errorMessage} />
         </div>
       ) : (
         <div>
+          <AppBar position='static'>
+            <Toolbar>
+              <Button color='inherit' to='/'>
+                home
+              </Button>
+              <Button color='inherit' to='/create'>
+                create
+              </Button>
+              <Button color='inherit' to='/users'>
+                users
+              </Button>
+            </Toolbar>
+          </AppBar>
           <Blogs
             blogs={blogs.sort((a, b) => b.likes - a.likes)}
             user={user}
@@ -115,7 +130,7 @@ const App = () => {
           />
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 
