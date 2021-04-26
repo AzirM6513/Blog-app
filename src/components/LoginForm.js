@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -15,8 +15,8 @@ const useStyles = makeStyles({
 });
 
 const LoginForm = ({ login, errorMessage }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('root');
+  const [password, setPassword] = useState('sekret');
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -30,7 +30,12 @@ const LoginForm = ({ login, errorMessage }) => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth='md'>
+    <Grid
+      style={{ marginTop: 15 + '%' }}
+      alignContent='center'
+      direction='column'
+      container
+    >
       <Typography variant='h4' component='h2' gutterBottom>
         login to application
       </Typography>
@@ -55,7 +60,7 @@ const LoginForm = ({ login, errorMessage }) => {
           login
         </Button>
       </form>
-    </Container>
+    </Grid>
   );
 };
 

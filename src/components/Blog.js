@@ -73,7 +73,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
 
   const Head = () => (
     <>
-      <Typography variant='h5' onClick={toggleDetails}>
+      <Typography variant='h5' onClick={toggleDetails} className='blog-title'>
         {blog.title}
       </Typography>
 

@@ -9,11 +9,12 @@ import loginService from './services/login';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import BlogForm from './components/BlogForm';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const [visible, setVisible] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -98,6 +99,17 @@ const App = () => {
     }
   };
 
+  const toggleForm = () => {
+    if (visible) {
+      document.getElementById('form').classList.add('hidden');
+      setVisible(false);
+      return;
+    }
+
+    document.getElementById('form').classList.remove('hidden');
+    setVisible(true);
+  };
+
   return (
     <div>
       {user === null ? (
@@ -108,17 +120,17 @@ const App = () => {
         <div>
           <AppBar position='static'>
             <Toolbar>
-              <Button color='inherit' to='/'>
-                home
-              </Button>
-              <Button color='inherit' to='/create'>
+              <Button color='inherit'>home</Button>
+              <Button color='inherit' onClick={toggleForm}>
                 create
               </Button>
-              <Button color='inherit' to='/users'>
-                users
+              <Button color='inherit'>users</Button>
+              <Button color='inherit' onClick={handleLogout}>
+                logout
               </Button>
             </Toolbar>
           </AppBar>
+          <BlogForm createBlog={addBlog} />
           <Blogs
             blogs={blogs.sort((a, b) => b.likes - a.likes)}
             user={user}
