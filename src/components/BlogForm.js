@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, TextField, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
 const BlogForm = ({ createBlog }) => {
@@ -23,13 +23,12 @@ const BlogForm = ({ createBlog }) => {
 
   return (
     <div id='form' className='hidden'>
-      <h2 style={{ textAlign: 'center' }}>create new</h2>
+      <h2 style={{ textAlign: 'center' }}>Create New</h2>
       <Grid justify='center' container>
         <form onSubmit={addBlog}>
           <div>
-            <p className='blog-form-label'>title:</p>
-            <input
-              id='title-input'
+            <TextField
+              label='Title'
               type='text'
               value={title}
               onChange={({ target }) => setTitle(target.value)}
@@ -37,9 +36,8 @@ const BlogForm = ({ createBlog }) => {
           </div>
 
           <div>
-            <p className='blog-form-label'>author:</p>
-            <input
-              id='author-input'
+            <TextField
+              label='Author'
               type='text'
               value={author}
               onChange={({ target }) => setAuthor(target.value)}
@@ -47,18 +45,17 @@ const BlogForm = ({ createBlog }) => {
           </div>
 
           <div>
-            <p className='blog-form-label'>url:</p>
-            <input
-              id='url-input'
+            <TextField
+              label='Url'
               type='text'
               value={url}
               onChange={({ target }) => setUrl(target.value)}
             />
           </div>
 
-          <button type='submit' id='submit-blog-btn'>
+          <Button type='submit' color='primary'>
             create
-          </button>
+          </Button>
         </form>
       </Grid>
     </div>
