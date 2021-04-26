@@ -57,3 +57,11 @@ li {
   color: red;
   border-color: red;
 }
+
+.hidden {
+  display: none;
+}
+
+.blog-title:hover {
+  color: #848484;
+}

@@ -1,25 +1,14 @@
 import React from 'react';
 
 import Blog from './Blog';
-import BlogForm from './BlogForm';
 import Notification from './Notification';
 
-const Blogs = ({
-  blogs,
-  user,
-  handleLogout,
-  errorMessage,
-  addBlog,
-  updateBlog,
-  removeBlog,
-}) => {
+import Container from '@material-ui/core/Container';
+
+const Blogs = ({ blogs, errorMessage, updateBlog, removeBlog }) => {
   return (
-    <div>
-      <h2>Blogs</h2>
+    <Container maxWidth='md'>
       <Notification message={errorMessage} />
-      <p className='username-p'>{user.name} logged-in</p>
-      <button onClick={handleLogout}>logout</button>
-      <BlogForm createBlog={addBlog} />
       <ul>
         {blogs.map((blog) => (
           <Blog
@@ -30,7 +19,7 @@ const Blogs = ({
           />
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };
 
