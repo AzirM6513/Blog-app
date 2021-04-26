@@ -37,20 +37,20 @@ const LoginForm = ({ login, errorMessage }) => {
       container
     >
       <Typography variant='h4' component='h2' gutterBottom>
-        login to application
+        Login to Application
       </Typography>
       <Error message={errorMessage} />
       <form onSubmit={handleLogin}>
         <div>
           <TextField
-            label='username'
+            label='Username'
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
           <TextField
-            label='password'
+            label='Password'
             type='password'
             value={password}
             onChange={({ target }) => setPassword(target.value)}
