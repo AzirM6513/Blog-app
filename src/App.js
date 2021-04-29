@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import BlogForm from './components/BlogForm';
+import { Typography } from '@material-ui/core';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -119,12 +120,15 @@ const App = () => {
       ) : (
         <div>
           <AppBar position='static'>
-            <Toolbar>
-              <Button color='inherit'>home</Button>
-              <Button color='inherit' onClick={toggleForm}>
-                create
-              </Button>
-              <Button color='inherit'>users</Button>
+            <Toolbar className='menu-container'>
+              <Typography variant='h6'>Blog App</Typography>
+              <div>
+                <Button color='inherit'>home</Button>
+                <Button color='inherit' onClick={toggleForm}>
+                  create
+                </Button>
+                <Button color='inherit'>users</Button>
+              </div>
               <Button color='inherit' onClick={handleLogout}>
                 logout
               </Button>
@@ -132,7 +136,9 @@ const App = () => {
           </AppBar>
           <BlogForm createBlog={addBlog} />
           <Blogs
-            blogs={blogs.sort((a, b) => b.likes - a.likes)}
+            blogs={blogs.sort(
+              (a, b) => b.likes - b.dislikes - (a.likes - a.dislikes)
+            )}
             user={user}
             handleLogout={handleLogout}
             errorMessage={errorMessage}

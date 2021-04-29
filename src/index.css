@@ -65,3 +65,8 @@ li {
 .blog-title:hover {
   color: #848484;
 }
+
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+}
