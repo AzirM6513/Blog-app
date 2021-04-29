@@ -132,7 +132,9 @@ const App = () => {
           </AppBar>
           <BlogForm createBlog={addBlog} />
           <Blogs
-            blogs={blogs.sort((a, b) => b.likes - a.likes)}
+            blogs={blogs.sort(
+              (a, b) => b.likes - b.dislikes - (a.likes - a.dislikes)
+            )}
             user={user}
             handleLogout={handleLogout}
             errorMessage={errorMessage}
