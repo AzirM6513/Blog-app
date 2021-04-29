@@ -48,6 +48,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     const newBlog = {
       user: blog.user,
       likes: blog.likes + 1,
+      dislikes: blog.dislikes,
       author: blog.author,
       title: blog.title,
       url: blog.url,
@@ -58,7 +59,17 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   };
 
   const addDislike = () => {
-    console.log('i feel like this button hasnt been implemented yet');
+    const newBlog = {
+      user: blog.user,
+      likes: blog.likes,
+      dislikes: blog.dislikes + 1,
+      author: blog.author,
+      title: blog.title,
+      url: blog.url,
+      id: blog.id,
+    };
+
+    updateBlog(newBlog);
   };
 
   const deleteBlog = () => {
@@ -84,7 +95,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         </Button>
 
         <Button size='small' onClick={addDislike} color='secondary'>
-          <ThumbDownAltOutlined fontSize='small' />0
+          <ThumbDownAltOutlined fontSize='small' />
+          {blog.dislikes}
         </Button>
       </CardActions>
     </>
