@@ -10,7 +10,9 @@ import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import BlogForm from './components/BlogForm';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import { IconButton } from '@material-ui/core';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -120,18 +122,51 @@ const App = () => {
       ) : (
         <div>
           <AppBar position='static'>
-            <Toolbar className='menu-container'>
+            <Toolbar className='navbar navbar-expand-sm'>
               <Typography variant='h6'>Blog App</Typography>
-              <div>
-                <Button color='inherit'>home</Button>
-                <Button color='inherit' onClick={toggleForm}>
-                  create
-                </Button>
-                <Button color='inherit'>users</Button>
+              <IconButton
+                type='button'
+                data-bs-toggle='collapse'
+                data-bs-target='#navbarNav'
+                className='navbar-toggler'
+              >
+                <MenuIcon style={{ color: 'white' }}></MenuIcon>
+              </IconButton>
+              <div
+                className='collapse navbar-collapse nav-container'
+                id='navbarNav'
+              >
+                <ul className='navbar-nav'>
+                  <li className='nav-item active'>
+                    <Button className='nav-link' color='inherit'>
+                      home
+                    </Button>
+                  </li>
+                  <li className='nav-item'>
+                    <Button
+                      className='nav-link'
+                      color='inherit'
+                      onClick={toggleForm}
+                    >
+                      create
+                    </Button>
+                  </li>
+                  <li className='nav-item'>
+                    <Button className='nav-link' color='inherit'>
+                      users
+                    </Button>
+                  </li>
+                  <li className='nav-item'>
+                    <Button
+                      className='nav-link'
+                      color='inherit'
+                      onClick={handleLogout}
+                    >
+                      logout
+                    </Button>
+                  </li>
+                </ul>
               </div>
-              <Button color='inherit' onClick={handleLogout}>
-                logout
-              </Button>
             </Toolbar>
           </AppBar>
           <BlogForm createBlog={addBlog} />
