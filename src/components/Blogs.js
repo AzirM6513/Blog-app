@@ -9,7 +9,7 @@ const Blogs = ({ blogs, errorMessage, updateBlog, removeBlog }) => {
   return (
     <Container maxWidth='md'>
       <Notification message={errorMessage} />
-      <ul>
+      <ul className='mt-3'>
         {blogs.map((blog) => (
           <Blog
             key={blog.id}
