@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core';
 
 import ThumbDownAltOutlined from '@material-ui/icons/ThumbDownAltOutlined';
@@ -32,10 +33,21 @@ const useStyles = makeStyles({
   deleteBtn: {
     marginTop: 0.6 + 'rem',
   },
+  commentHeader: {
+    marginTop: 0.6 + 'rem',
+    marginBottom: 0.3 + 'rem',
+  },
+  comments: {
+    marginBottom: 0.6 + 'rem',
+  },
+  comment: {
+    listStyle: 'disc',
+  },
 });
 
 const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [newComment, setNewComment] = useState('');
   const showWhenVisible = { display: showDetails ? '' : 'none' };
 
   let username = null;
@@ -53,6 +65,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       title: blog.title,
       url: blog.url,
       id: blog.id,
+      comments: blog.comments,
     };
 
     updateBlog(newBlog);
@@ -67,6 +80,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
       title: blog.title,
       url: blog.url,
       id: blog.id,
+      comments: blog.comments,
     };
 
     updateBlog(newBlog);
@@ -102,6 +116,38 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     </>
   );
 
+  const addComment = (e) => {
+    e.preventDefault();
+    const blogObject = {
+      user: blog.user,
+      likes: blog.likes,
+      dislikes: blog.dislikes,
+      author: blog.author,
+      title: blog.title,
+      url: blog.url,
+      id: blog.id,
+      comments: blog.comments.concat(newComment),
+    };
+
+    updateBlog(blogObject);
+    setNewComment('');
+  };
+
+  const CommentSection = () => (
+    <div style={showWhenVisible}>
+      <Typography variant='h6' className={classes.commentHeader}>
+        Comments
+      </Typography>
+      <ul>
+        {blog.comments.map((comment, i) => (
+          <li key={i} className={classes.comment}>
+            {comment}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   const Info = () => (
     <div style={showWhenVisible} className={classes.content}>
       <Typography variant='body1'>
@@ -129,6 +175,16 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
     <Card className={classes.gutterBottom} raised>
       <CardContent>
         <Head />
+        <CommentSection />
+        <form onSubmit={addComment} style={showWhenVisible}>
+          <TextField
+            className={classes.comments}
+            label='New Comment'
+            type='text'
+            value={newComment}
+            onChange={({ target }) => setNewComment(target.value)}
+          ></TextField>
+        </form>
         <Info />
       </CardContent>
     </Card>
